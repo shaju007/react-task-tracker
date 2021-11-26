@@ -90,10 +90,6 @@ function App() {
 
     const data = await res.json();
 
-    const createTask = () => {
-      const taskRef = app.
-    };
-
     setTasks([...tasks, data]);
   };
   useEffect(() => {
