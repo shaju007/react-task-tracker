@@ -7,7 +7,6 @@ const AddTask = ({ onAdd }) => {
 
   const onSubmit = (e) => {
     e.preventDefault();
-    console.log('submit clicked');
     if (!text) {
       alert('Please add a task');
       return;

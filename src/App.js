@@ -6,13 +6,8 @@ import loadingImage from './img/Rolling-1.5s-48px.svg';
 import Footer from './components/Footer';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
 import About from './components/About';
-import app from './util/firebase';
 
 function App() {
-  const [deleteCounter, setDeleteCounter] = useState(0);
-  useEffect(() => {
-    //console.log(deleteCounter);
-  });
   const [showAddTask, setShowAddTask] = useState(false);
   const [tasks, setTasks] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -40,9 +35,6 @@ function App() {
       method: 'DELETE',
     });
     setTasks(tasks.filter((task) => task.id !== id));
-    setDeleteCounter(deleteCounter + 1);
-
-    //console.log(deleteCounter);
   };
 
   // Fetch a single task
@@ -81,8 +73,14 @@ function App() {
 
   // Add task
   const addTask = async (task) => {
+    let id;
     // increment id by one
-    const id = 1 + tasks.length + deleteCounter;
+    if (tasks.length > 0) {
+      id = tasks[tasks.length - 1].id + 1;
+    } else {
+      id = 1;
+    }
+
     const newTask = { ...task, id };
 
     const res = await fetch('https://new-fake-server-app.herokuapp.com/tasks', {
@@ -97,9 +95,6 @@ function App() {
 
     setTasks([...tasks, data]);
   };
-  useEffect(() => {
-    //console.log(tasks);
-  });
 
   return (
     <Router>
