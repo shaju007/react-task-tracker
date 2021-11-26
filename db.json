@@ -1,16 +1,3 @@
 {
-  "tasks": [
-    {
-      "text": "table buy",
-      "day": "tomorrow",
-      "reminder": true,
-      "id": 1
-    },
-    {
-      "text": "go to doctor",
-      "day": "friday 11th",
-      "reminder": true,
-      "id": 3
-    }
-  ]
+  "tasks": []
 }
