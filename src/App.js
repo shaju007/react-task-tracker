@@ -4,7 +4,7 @@ import AddTask from './components/AddTask';
 import { useState, useEffect } from 'react';
 import loadingImage from './img/Rolling-1.5s-48px.svg';
 import Footer from './components/Footer';
-import { BrowserRouter as Router, Route } from 'react-router-dom';
+import { BrowserRouter as Router, Route, Routes } from 'react-router-dom';
 import About from './components/About';
 
 function App() {
@@ -104,32 +104,30 @@ function App() {
           toggleAddForm={() => setShowAddTask(!showAddTask)}
           showAddTaskValue={showAddTask}
         />
-
+<Routes>
         <Route
           path='/'
-          exact
-          render={(props) => (
-            <>
-              {showAddTask && <AddTask onAdd={addTask} />}
-              {loading ? (
-                <div style={{ textAlign: 'center' }}>
-                  <img src={loadingImage} />
-                </div>
-              ) : tasks.length > 0 ? (
-                <Tasks
-                  tasks={tasks}
-                  onDelete={deleteTask}
-                  onToggle={toggleReminder}
-                />
-              ) : (
-                'No Tasks to Show'
-              )}
-            </>
-          )}
+          element={<>
+            {showAddTask && <AddTask onAdd={addTask} />}
+            {loading ? (
+              <div style={{ textAlign: 'center' }}>
+                <img src={loadingImage} />
+              </div>
+            ) : tasks.length > 0 ? (
+              <Tasks
+                tasks={tasks}
+                onDelete={deleteTask}
+                onToggle={toggleReminder}
+              />
+            ) : (
+              'No Tasks to Show'
+            )}
+          </>}
+          
         />
 
-        <Route path='/about' component={About} />
-
+        <Route path='/about' element={<About/>} />
+</Routes>
         <Footer />
       </div>
     </Router>
